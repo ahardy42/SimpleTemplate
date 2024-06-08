@@ -7,12 +7,13 @@ import { setUsers, selectUsers } from '../../state/slices/users'
 
 export default function HomeScreen() {
     const { data, error, isLoading } = usersApi.endpoints.getUsers.useQuery()
+    console.log('HomeScreen data:', data, error, isLoading, usersApi.endpoints)
     const navigation = useNavigation()
     const dispatch = useDispatch()
     const users = useSelector(selectUsers)
 
     React.useEffect(() => {
-        console.log('Home user data:', data)
+        console.log('Home user data:', data, error, isLoading)
         if (data) dispatch(setUsers(data))
     }, [data])
 
@@ -28,11 +29,11 @@ export default function HomeScreen() {
                 <View style={styles.wrapper}>
                     {users?.map(user => (
                         <TouchableOpacity key={user.id} style={styles.user} onPress={() => navigateToUser(user.id)}>
-                            <Text style={styles.userText}>{user.name}</Text>
+                            <Text style={styles.userText}>{user.firstName} {user.lastName}</Text>
                         </TouchableOpacity>
                     ))}
                     {isLoading && <ActivityIndicator />}
-                    {!!error && <Text>Error: {error.message}</Text>}
+                    {!!error && <Text>Error: {error.error}</Text>}
                 </View>
             </ScrollView>
         </SafeAreaView>

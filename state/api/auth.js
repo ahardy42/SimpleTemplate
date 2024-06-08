@@ -1,22 +1,19 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
     reducerPath: 'authApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https:www.example-app.com' }),
-    prepareHeaders: (headers, { getState }) => {
-        const token = getState().auth.token
-        if (token) {
-            headers.set('Authorization', `Bearer ${token}`)
-        }
-        return headers
-    },
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/auth/' }),
     endpoints: builder => ({
         login: builder.mutation({
-            query: credentials => ({
+            query: ({ username, password }) => ({
                 url: 'login',
                 method: 'POST',
-                body: credentials,
+                body: { username, password },
             }),
+            transformResponse: body => {
+                const { token, refreshToken, ...user } = body
+                return { token, refreshToken, user }
+            }
         }),
         logout: builder.mutation({
             query: () => ({
@@ -25,9 +22,10 @@ export const authApi = createApi({
             }),
         }),
         refreshToken: builder.mutation({
-            query: () => ({
+            query: refreshToken => ({
                 url: 'refresh',
                 method: 'POST',
+                body: { refreshToken },
             }),
         }),
     }),

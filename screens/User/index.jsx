@@ -39,7 +39,7 @@ export default function UserScreen({ route }) {
                 {!!error && <Text>Error: {error.message}</Text>}
                 {!!selectedUser && (
                     <View>
-                        <Text>Name: {selectedUser.name}</Text>
+                        <Text>Name: {selectedUser.firstName} {selectedUser.lastName}</Text>
                         <Text>Email: {selectedUser.email}</Text>
                         <Text>Phone: {selectedUser.phone}</Text>
                     </View>

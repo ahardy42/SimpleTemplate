@@ -2,15 +2,29 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const usersApi = createApi({
     reducerPath: 'usersApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/users' }),
+    prepareHeaders: (headers, { getState }) => {
+        const token = getState().auth.token
+        if (token) {
+            // headers.set('Authorization', `Bearer ${token}`) // this is how you would set the token if you were using a token
+        }
+        return headers
+    },
     tagTypes: ['User'],
     endpoints: builder => ({
         getUsers: builder.query({
-            query: () => 'users',
+            query: () => ({
+                url: '/',
+                method: 'GET',
+            }),
+            transformResponse: body => body.users,
             providesTags: ['User'],
         }),
         getUser: builder.query({
-            query: id => `users/${id}`,
+            query: id => ({
+                url: `/${id}`,
+                method: 'GET',
+            }),
             providesTags: ['User'],
         }),
     }),
