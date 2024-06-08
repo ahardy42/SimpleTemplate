@@ -1,10 +1,14 @@
 import React from 'react'
-import { SafeAreaView } from 'react-native'
+import { Provider } from 'react-redux'
 import Screens from './screens'
+
+import store from './state/store'
 
 export default function App() {
 
     return (
-        <Screens />
+        <Provider {...{ store }}>
+            <Screens />
+        </Provider>
     )
 }
