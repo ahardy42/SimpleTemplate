@@ -1,79 +1,99 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+## Environment:
 
-# Getting Started
-
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
-
-## Step 1: Start the Metro Server
-
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
-
-To start Metro, run the following command from the _root_ of your React Native project:
-
-```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
 ```
+System:
+  OS: macOS 14.3.1
+  CPU: (12) arm64 Apple M2 Max
+  Memory: 85.52 MB / 32.00 GB
+  Shell:
+    version: "5.9"
+    path: /bin/zsh
+Binaries:
+  Node:
+    version: 21.3.0
+    path: ~/.nodenv/versions/21.3.0/bin/node
+  Yarn:
+    version: 3.6.4
+    path: /opt/homebrew/bin/yarn
+  npm:
+    version: 10.2.4
+    path: ~/.nodenv/versions/21.3.0/bin/npm
+  Watchman:
+    version: 2023.11.27.00
+    path: /opt/homebrew/bin/watchman
+Managers:
+  CocoaPods:
+    version: 1.14.3
+    path: /Users/ultimatequestioncoding/.rubies/ruby-2.7.4/bin/pod
+SDKs:
+  iOS SDK:
+    Platforms:
+      - DriverKit 23.5
+      - iOS 17.5
+      - macOS 14.5
+      - tvOS 17.5
+      - visionOS 1.2
+      - watchOS 10.5
+  Android SDK: Not Found
+IDEs:
+  Android Studio: 2023.1 AI-231.9392.1.2311.11076708
+  Xcode:
+    version: 15.4/15F31d
+    path: /usr/bin/xcodebuild
+Languages:
+  Java:
+    version: 21.0.3
+    path: /Users/ultimatequestioncoding/.sdkman/candidates/java/current/bin/javac
+  Ruby:
+    version: 2.7.4
+    path: /Users/ultimatequestioncoding/.rubies/ruby-2.7.4/bin/ruby
+npmPackages:
+  "@react-native-community/cli": Not Found
+  react:
+    installed: 18.2.0
+    wanted: 18.2.0
+  react-native:
+    installed: 0.74.2
+    wanted: 0.74.2
+  react-native-macos: Not Found
+npmGlobalPackages:
+  "*react-native*": Not Found
+Android:
+  hermesEnabled: true
+  newArchEnabled: false
+iOS:
+  hermesEnabled: true
+  newArchEnabled: false
+  ```
 
-## Step 2: Start your Application
+## setup of environment
+I'm using Ruby On Mac for ruby, nodenv for node, SDKMAN! for java. my default ruby of 2.7.4 works fine, app was initially built with 3.3.1
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## libraries!
 
-### For Android
+### navigation
+using @react-navigation v6
 
-```bash
-# using npm
-npm run android
+### state
 
-# OR using Yarn
-yarn android
-```
+### animation
+using reanimated v3 which is a dependency of @react-navigation.
 
-### For iOS
+### api
+fetch-refresh package will control handling token refreshing. otherwise, native fetch package works fine
 
-```bash
-# using npm
-npm run ios
+## Directory Structure
 
-# OR using Yarn
-yarn ios
-```
+### navigation
+this folder contains the constants, and the deep-linking files for the app
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+### screens
+this folder contains the various screens for the app. ```index.js``` is where the ```NavigationContainer``` and main stack are exported from. Logically if there is only one stack, each screen gets a folder. otherwise, there should be a stack directory with each screen having a folder. within the screen folder a ```index.js``` file will export the screen component
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+### utility
+theme setup, icon import / exports
 
-## Step 3: Modifying your App
+### services
+API setup. 
 
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+### state
