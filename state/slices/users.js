@@ -1,19 +1,25 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createSlice } from '@reduxjs/toolkit'
 
-export const usersApi = createApi({
-    reducerPath: 'usersApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com' }),
-    tagTypes: ['User'],
-    endpoints: builder => ({
-        getUsers: builder.query({
-            query: () => 'users',
-            providesTags: ['User'],
-        }),
-        getUser: builder.query({
-            query: id => `users/${id}`,
-            providesTags: ['User'],
-        }),
-    }),
+const slice = createSlice({
+    name: 'users',
+    initialState: {
+        users: [],
+        selectedUser: null,
+    },
+    reducers: {
+        setUsers(state, action) {
+            console.log('setUsers action:', action)
+            state.users = action.payload
+        },
+        setSelectedUser(state, action) {
+            state.selectedUser = action.payload
+        },
+    },
 })
 
-export const { useGetUsersQuery, useGetUserQuery, useLazyGetUserQuery } = usersApi
+export default slice.reducer
+
+export const { setUsers, setSelectedUser } = slice.actions
+
+export const selectUsers = state => state.users.users
+export const selectSelectedUser = state => state.users.selectedUser
