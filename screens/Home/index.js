@@ -1,14 +1,19 @@
 import React from 'react'
 import { View, Text, ActivityIndicator, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { usersApi } from '../../state/slices/users'
+import { useSelector, useDispatch } from 'react-redux'
+import { usersApi } from '../../state/api/users'
+import { setUsers, selectUsers } from '../../state/slices/users'
 
 export default function HomeScreen() {
     const { data, error, isLoading } = usersApi.endpoints.getUsers.useQuery()
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+    const users = useSelector(selectUsers)
 
     React.useEffect(() => {
-        console.log('HomeScreen data:', data)
+        console.log('Home user data:', data)
+        if (data) dispatch(setUsers(data))
     }, [data])
 
     const navigateToUser = id => {
@@ -21,7 +26,7 @@ export default function HomeScreen() {
             <Text style={styles.subtitle}>Users:</Text>
             <ScrollView>
                 <View style={styles.wrapper}>
-                    {data?.map(user => (
+                    {users?.map(user => (
                         <TouchableOpacity key={user.id} style={styles.user} onPress={() => navigateToUser(user.id)}>
                             <Text style={styles.userText}>{user.name}</Text>
                         </TouchableOpacity>

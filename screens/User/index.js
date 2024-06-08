@@ -1,12 +1,22 @@
 import React from 'react'
 import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { usersApi } from '../../state/slices/users'
+import { usersApi } from '../../state/api/users'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectSelectedUser, setSelectedUser } from '../../state/slices/users'
 
 export default function UserScreen({ route }) {
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+    const selectedUser = useSelector(selectSelectedUser)
     // use the `useQuery` hook to fetch the user data
     const { data, error, isLoading } = usersApi.endpoints.getUser.useQuery(route.params.id, { skip: !route.params.id })
+
+    React.useEffect(() => {
+        console.log('User data:', data)
+        if (data) dispatch(setSelectedUser(data))
+        return () => dispatch(setSelectedUser(null))
+    }, [data])
 
     const navigateBack = () => {
         navigation.goBack()
@@ -26,12 +36,12 @@ export default function UserScreen({ route }) {
             <View style={styles.separator} />
             <View style={styles.wrapper}>
                 {isLoading && <Text>Loading...</Text>}
-                {error && <Text>Error: {error.message}</Text>}
-                {data && (
+                {!!error && <Text>Error: {error.message}</Text>}
+                {!!selectedUser && (
                     <View>
-                        <Text>Name: {data.name}</Text>
-                        <Text>Email: {data.email}</Text>
-                        <Text>Phone: {data.phone}</Text>
+                        <Text>Name: {selectedUser.name}</Text>
+                        <Text>Email: {selectedUser.email}</Text>
+                        <Text>Phone: {selectedUser.phone}</Text>
                     </View>
                 )}
             </View>
