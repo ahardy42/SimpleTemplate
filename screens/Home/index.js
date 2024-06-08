@@ -1,14 +1,20 @@
 import React from 'react'
-import { View, Text, ActivityIndicator, StyleSheet, ScrollView, SafeAreaView } from 'react-native'
+import { View, Text, ActivityIndicator, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import { usersApi } from '../../state/slices/users'
 
 export default function HomeScreen() {
     const { data, error, isLoading } = usersApi.endpoints.getUsers.useQuery()
+    const navigation = useNavigation()
 
     React.useEffect(() => {
         console.log('HomeScreen data:', data)
     }, [data])
-    
+
+    const navigateToUser = id => {
+        navigation.navigate('User', { id })
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Welcome to the Home Screen!</Text>
@@ -16,9 +22,9 @@ export default function HomeScreen() {
             <ScrollView>
                 <View style={styles.wrapper}>
                     {data?.map(user => (
-                        <View key={user.id} style={styles.user}>
+                        <TouchableOpacity key={user.id} style={styles.user} onPress={() => navigateToUser(user.id)}>
                             <Text style={styles.userText}>{user.name}</Text>
-                        </View>
+                        </TouchableOpacity>
                     ))}
                     {isLoading && <ActivityIndicator />}
                     {!!error && <Text>Error: {error.message}</Text>}
