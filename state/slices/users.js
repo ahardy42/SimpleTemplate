@@ -6,6 +6,7 @@ const slice = createSlice({
         users: [],
         selectedUser: null,
     },
+    // using a normal reducer to set up state (unlike the matchers in the auth slice)
     reducers: {
         setUsers(state, action) {
             console.log('setUsers action:', action)
@@ -21,5 +22,6 @@ export default slice.reducer
 
 export const { setUsers, setSelectedUser } = slice.actions
 
+// Selectors to be used with useSelector
 export const selectUsers = state => state.users.users
 export const selectSelectedUser = state => state.users.selectedUser

@@ -8,6 +8,8 @@ const slice = createSlice({
         token: null,
     },
     reducers: {},
+    // Add extra reducers for the auth API endpoints
+    // these matchers will update the state based on the result of the API calls when they are fulfilled!!
     extraReducers: builder => {
         builder
             .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
@@ -26,4 +28,5 @@ const slice = createSlice({
 
 export default slice.reducer
 
+// Selectors to be used with useSelector
 export const selectUser = state => state.auth.user
