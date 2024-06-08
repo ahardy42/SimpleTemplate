@@ -75,12 +75,13 @@ I'm using Ruby On Mac for ruby, nodenv for node, SDKMAN! for java. my default ru
 using @react-navigation v6
 
 ### state
+Using redux-toolkit! it's a little more confusing but it requires less boilerplate. ultimately i think using typescript will help to understand the shape of the application state
 
 ### animation
 using reanimated v3 which is a dependency of @react-navigation.
 
 ### api
-fetch-refresh package will control handling token refreshing. otherwise, native fetch package works fine
+redux toolkit provides a nice fetch wrapper. this is kind of barebones set up.  There are provided methods to deal with token refreshing. it's a complicated API but it's robust!
 
 ## Directory Structure
 
