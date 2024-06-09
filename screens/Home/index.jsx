@@ -34,6 +34,10 @@ export default function HomeScreen() {
                     {!!error && <Text>Error: {error.error}</Text>}
                 </View>
             </ScrollView>
+            <View style={{ flex: 1 }} />
+            <TouchableOpacity onPress={() => navigation.navigate('State')}>
+                <Text style={{ textAlign: 'center', fontSize: 18, color: 'blue' }}>View State</Text>
+            </TouchableOpacity>
         </SafeAreaView>
     )
 }
