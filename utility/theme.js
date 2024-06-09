@@ -67,9 +67,9 @@ export const typography = {
         lineHeight: 20,
         fontFamily: fonts.default,
     },
-    callout: {
-        fontSize: 16,
-        lineHeight: 20,
+    tiny: {
+        fontSize: 13,
+        lineHeight: 16,
         fontFamily: fonts.italic,
     },
     button: {
