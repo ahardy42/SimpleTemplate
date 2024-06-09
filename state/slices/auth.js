@@ -8,7 +8,14 @@ const slice = createSlice({
         token: null,
         refreshToken: null,
     },
-    reducers: {},
+    reducers: {
+        setToken: (state, action) => {
+            state.token = action.payload
+        },
+        setRefreshToken: (state, action) => {
+            state.refreshToken = action.payload
+        }
+    },
     // Add extra reducers for the auth API endpoints
     // these matchers will update the state based on the result of the API calls when they are fulfilled!!
     extraReducers: builder => {
@@ -29,6 +36,8 @@ const slice = createSlice({
             })
     },
 })
+
+export const { setToken, setRefreshToken } = slice.actions
 
 export default slice.reducer
 

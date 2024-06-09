@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { returnBaseQueryWithReauth } from './baseQuery'
 
 export const usersApi = createApi({
     reducerPath: 'usersApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/users' }),
+    baseQuery: returnBaseQueryWithReauth('https://dummyjson.com/users'),
     prepareHeaders: (headers, { getState }) => {
         const token = getState().auth.token
         if (token) {

@@ -7,13 +7,11 @@ import { setUsers, selectUsers } from '../../state/slices/users'
 
 export default function HomeScreen() {
     const { data, error, isLoading } = usersApi.endpoints.getUsers.useQuery()
-    console.log('HomeScreen data:', data, error, isLoading, usersApi.endpoints)
     const navigation = useNavigation()
     const dispatch = useDispatch()
     const users = useSelector(selectUsers)
 
     React.useEffect(() => {
-        console.log('Home user data:', data, error, isLoading)
         if (data) dispatch(setUsers(data))
     }, [data])
 

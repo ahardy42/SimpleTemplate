@@ -9,7 +9,6 @@ const slice = createSlice({
     // using a normal reducer to set up state (unlike the matchers in the auth slice)
     reducers: {
         setUsers(state, action) {
-            console.log('setUsers action:', action)
             state.users = action.payload
         },
         setSelectedUser(state, action) {
