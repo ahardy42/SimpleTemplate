@@ -85,6 +85,28 @@ redux toolkit provides a nice fetch wrapper. this is kind of barebones set up.  
 
 ## Directory Structure
 
+```
+api
+  - config setup for redux
+ navigation
+  - stacks
+    - stack files (AuthStack.js)
+    links.js // setup for react-navigation linking
+    screens.js // file containing screen names
+screens
+  - directories containing screens for the app
+state
+  - api
+    - apis (RKT query)
+  - slices
+    - state slices for redux-toolkit
+  store.js // store setup for redux
+utility
+  - helper files like styles and theming files
+components
+  - various shared components for the app
+```
+
 ### navigation
 this folder contains the constants, and the deep-linking files for the app
 
