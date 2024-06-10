@@ -1,40 +1,19 @@
-import React from 'react'
-import { View, Text, ActivityIndicator, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { useSelector, useDispatch } from 'react-redux'
-import { usersApi } from '../../state/api/users'
-import { setUsers, selectUsers } from '../../state/slices/users'
+import React from 'react'
+import { Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native'
 
 export default function HomeScreen() {
-    const { data, error, isLoading } = usersApi.endpoints.getUsers.useQuery()
     const navigation = useNavigation()
-    const dispatch = useDispatch()
-    const users = useSelector(selectUsers)
-
-    React.useEffect(() => {
-        if (data) dispatch(setUsers(data))
-    }, [data])
-
-    const navigateToUser = id => {
-        navigation.navigate('User', { id })
-    }
-
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Welcome to the Home Screen!</Text>
-            <Text style={styles.subtitle}>Users:</Text>
-            <ScrollView>
-                <View style={styles.wrapper}>
-                    {users?.map(user => (
-                        <TouchableOpacity key={user.id} style={styles.user} onPress={() => navigateToUser(user.id)}>
-                            <Text style={styles.userText}>{user.firstName} {user.lastName}</Text>
-                        </TouchableOpacity>
-                    ))}
-                    {isLoading && <ActivityIndicator />}
-                    {!!error && <Text>Error: {error.error}</Text>}
-                </View>
-            </ScrollView>
-            <View style={{ flex: 1 }} />
+            <Text style={styles.subtitle}>Please select a screen to navigate to:</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Users')}>
+                <Text style={{ textAlign: 'center', fontSize: 18, color: 'blue' }}>View Users</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Storage')}>
+                <Text style={{ textAlign: 'center', fontSize: 18, color: 'blue' }}>View Storage</Text>
+            </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('State')}>
                 <Text style={{ textAlign: 'center', fontSize: 18, color: 'blue' }}>View State</Text>
             </TouchableOpacity>
@@ -46,7 +25,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-
     },
     title: {
         textAlign: 'center',

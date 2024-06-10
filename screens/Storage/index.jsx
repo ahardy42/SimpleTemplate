@@ -1,18 +1,26 @@
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
-import { useSelector } from 'react-redux'
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
 import { colors, layout, typography } from '../../utility/theme'
+import { useGetAll } from '../../utility/storage'
 import Header from '../../components/Header'
 
-export default function State() {
-    const selectAuth = state => state.auth
-    const state = useSelector(selectAuth)
+export default function Storage() {
 
+    const { state: storage, loading } = useGetAll()
+    console.log('storage', storage)
     return (
         <SafeAreaView style={styles.container}>
-            <Header title='State' />
+            <Header title='Storage' />
             <ScrollView>
                 <View style={styles.state}>
-                    <Text style={styles.text}>{JSON.stringify(state, null, 2)}</Text>
+                    {loading ? (
+                        <ActivityIndicator color={colors.white} />
+                    ) : (
+                        storage.map((item, index) => (
+                            <Text key={index} style={styles.text}>
+                                {JSON.stringify(item, null, 2)}
+                            </Text>
+                        ))
+                    )}
                 </View>
             </ScrollView>
         </SafeAreaView>
