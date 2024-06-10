@@ -77,6 +77,8 @@ using @react-navigation v6
 ### state
 Using redux-toolkit! it's a little more confusing but it requires less boilerplate. ultimately i think using typescript will help to understand the shape of the application state
 
+the template is also using ```redux-persist``` for state management. currently, only the auth portion is set up as persistent state.
+
 ### animation
 using reanimated v3 which is a dependency of @react-navigation.
 
@@ -113,6 +115,9 @@ this folder contains the constants, and the deep-linking files for the app
 ### screens
 this folder contains the various screens for the app. ```index.js``` is where the ```NavigationContainer``` and main stack are exported from. Logically if there is only one stack, each screen gets a folder. otherwise, there should be a stack directory with each screen having a folder. within the screen folder a ```index.js``` file will export the screen component
 
+### components
+shared component files for use throughout the app
+
 ### utility
 theme setup, icon import / exports
 
@@ -120,3 +125,4 @@ theme setup, icon import / exports
 API setup. 
 
 ### state
+redux setup files separated into ```api``` and ```slices``` 
